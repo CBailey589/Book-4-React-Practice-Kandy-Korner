@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import StoreList from "./StoreList"
 import EmployeeList from "./EmployeeList"
 import CandyList from "./CandyList"
+import SearchResults from "./SearchResults"
 
 
 class ApplicationViews extends Component {
@@ -11,7 +12,7 @@ class ApplicationViews extends Component {
         TacoStores: [],
         TacoEmployees: [],
         TacoCandyTypes: [],
-        TacoCandies: []
+        TacoCandies: [],
     }
 
     componentDidMount() {
@@ -21,13 +22,13 @@ class ApplicationViews extends Component {
             .then(r => r.json())
             .then(parsedStores => newState.TacoStores = parsedStores)
             .then(() => fetch("http://localhost:5002/employeeArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedEmployees => newState.TacoEmployees = parsedEmployees)
             .then(() => fetch("http://localhost:5002/candyTypeArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedCandyTypes => newState.TacoCandyTypes = parsedCandyTypes)
             .then(() => fetch("http://localhost:5002/candyArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedCandy => newState.TacoCandies = parsedCandy)
             .then(() => this.setState(newState))
 
@@ -43,8 +44,15 @@ class ApplicationViews extends Component {
                     return <EmployeeList TacoEmployees={this.state.TacoEmployees} />
                 }} />
                 <Route exact path="/candies" render={() => {
-                    return <CandyList employees={this.state.employees}CandyList TacoCandyTypes={this.state.TacoCandyTypes}
-                    TacoCandies={this.state.TacoCandies} />
+                    return <CandyList TacoCandyTypes={this.state.TacoCandyTypes}
+                        TacoCandies={this.state.TacoCandies} />
+                }} />
+                <Route exact path="/search" render={() => {
+                    return <SearchResults TacoStores={this.props.FilteredStores}
+                        TacoEmployees={this.props.FilteredEmployees}
+                        TacoCandyTypes={this.props.FilteredCandies}
+                        TacoCandies={this.state.TacoCandies}
+                    />
                 }} />
             </React.Fragment>
         )
