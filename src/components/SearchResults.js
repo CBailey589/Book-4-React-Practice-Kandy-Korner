@@ -8,7 +8,7 @@ class SearchResults extends Component {
                 <section className="matchingCandies">
                     <h3>These candies match your search:</h3>
                     {
-                        this.props.location.stateObject.FilteredCandies.map(candy =>
+                        this.props.location.SearchResults.FilteredCandies.map(candy =>
                             <div key={`matchingCandy--${candy.id}`}>
                                 {candy.name}
                             </div>
@@ -18,7 +18,7 @@ class SearchResults extends Component {
                 <section className="matchingStores">
                     <h3>These stores match your search:</h3>
                     {
-                        this.props.location.stateObject.FilteredStores.map(store =>
+                        this.props.location.SearchResults.FilteredStores.map(store =>
                             <div key={`matchingStore--${store.id}`}>
                                 {store.name}
                             </div>
@@ -28,7 +28,7 @@ class SearchResults extends Component {
                 <section className="matchingEmployees">
                     <h3>These employees match your search:</h3>
                     {
-                        this.props.location.stateObject.FilteredEmployees.map(employee =>
+                        this.props.location.SearchResults.FilteredEmployees.map(employee =>
                             <div key={`matchingEmployee--${employee.id}`}>
                                 {employee.name}
                             </div>

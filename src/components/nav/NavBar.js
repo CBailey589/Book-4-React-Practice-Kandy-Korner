@@ -8,9 +8,6 @@ class NavBar extends Component {
         super(props);
         this.state = {
             SearchInput: '',
-            FilteredStores: [],
-            FilteredEmployees: [],
-            FilteredCandies: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.keyPress = this.keyPress.bind(this);
@@ -21,29 +18,23 @@ class NavBar extends Component {
     }
 
     keyPress(event) {
-        // if key is enter key
-        const newState = {}
+        const SearchResults = {}
         if (event.keyCode === 13) {
             console.log(this.state.SearchInput)
             fetch(`http://localhost:5002/storeArray?name_like=${this.state.SearchInput}`)
                 .then(r => r.json())
-                .then((parsedJson => newState.FilteredStores = parsedJson))
+                .then((parsedJson => SearchResults.FilteredStores = parsedJson))
                 .then(() => fetch(`http://localhost:5002/employeeArray?name_like=${this.state.SearchInput}`))
                 .then(r => r.json())
-                .then(parsedJson => newState.FilteredEmployees = parsedJson)
+                .then(parsedJson => SearchResults.FilteredEmployees = parsedJson)
                 .then(() => fetch(`http://localhost:5002/candyArray?name_like=${this.state.SearchInput}`))
                 .then(r => r.json())
-                .then(parsedJson => newState.FilteredCandies = parsedJson)
-                .then(() => this.setState(newState))
+                .then(parsedJson => SearchResults.FilteredCandies = parsedJson)
+                .then(() => this.setState(SearchResults))
                 .then(() => {
-                    let stateObject = {
-                        FilteredCandies: this.state.FilteredCandies,
-                        FilteredStores: this.state.FilteredStores,
-                        FilteredEmployees: this.state.FilteredEmployees
-                    }
                     this.props.history.push({
                         pathname: `/search`,
-                        stateObject
+                        SearchResults
                     })
                 })
         }
