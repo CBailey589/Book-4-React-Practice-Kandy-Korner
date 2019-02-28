@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import StoreList from "./StoreList"
 import EmployeeList from "./EmployeeList"
 import CandyList from "./CandyList"
+import SearchResults from "./SearchResults"
 
 
 class ApplicationViews extends Component {
@@ -11,7 +12,7 @@ class ApplicationViews extends Component {
         TacoStores: [],
         TacoEmployees: [],
         TacoCandyTypes: [],
-        TacoCandies: []
+        TacoCandies: [],
     }
 
     discontinueCandy = (id) => {
@@ -30,13 +31,13 @@ class ApplicationViews extends Component {
             .then(r => r.json())
             .then(parsedStores => newState.TacoStores = parsedStores)
             .then(() => fetch("http://localhost:5002/employeeArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedEmployees => newState.TacoEmployees = parsedEmployees)
             .then(() => fetch("http://localhost:5002/candyTypeArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedCandyTypes => newState.TacoCandyTypes = parsedCandyTypes)
             .then(() => fetch("http://localhost:5002/candyArray")
-            .then(r => r.json()))
+                .then(r => r.json()))
             .then(parsedCandy => newState.TacoCandies = parsedCandy)
             .then(() => this.setState(newState))
 
