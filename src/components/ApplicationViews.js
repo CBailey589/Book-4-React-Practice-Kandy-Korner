@@ -48,11 +48,7 @@ class ApplicationViews extends Component {
                         TacoCandies={this.state.TacoCandies} />
                 }} />
                 <Route exact path="/search" render={() => {
-                    return <SearchResults TacoStores={this.props.FilteredStores}
-                        TacoEmployees={this.props.FilteredEmployees}
-                        TacoCandyTypes={this.props.FilteredCandies}
-                        TacoCandies={this.state.TacoCandies}
-                    />
+                    return <SearchResults />
                 }} />
             </React.Fragment>
         )

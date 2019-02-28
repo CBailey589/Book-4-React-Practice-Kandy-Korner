@@ -30,16 +30,21 @@ class NavBar extends Component {
                 .then((parsedJson => newState.FilteredStores = parsedJson))
                 .then(() => fetch(`http://localhost:5002/employeeArray?name_like=${this.state.SearchInput}`))
                 .then(r => r.json())
-                .then(parsedJson=> newState.FilteredEmployees = parsedJson)
+                .then(parsedJson => newState.FilteredEmployees = parsedJson)
                 .then(() => fetch(`http://localhost:5002/candyArray?name_like=${this.state.SearchInput}`))
                 .then(r => r.json())
-                .then(parsedJson=> newState.FilteredCandies = parsedJson)
+                .then(parsedJson => newState.FilteredCandies = parsedJson)
                 .then(() => this.setState(newState))
                 .then(() => {
-                    console.log(this.state.FilteredStores)
-                    console.log(this.state.FilteredEmployees)
-                    console.log(this.state.FilteredCandies)
-                    this.props.history.push(`/search`)
+                    let stateObject = {
+                        FilteredCandies: this.state.FilteredCandies,
+                        FilteredStores: this.state.FilteredStores,
+                        FilteredEmployees: this.state.FilteredEmployees
+                    }
+                    this.props.history.push({
+                        pathname: `/search`,
+                        stateObject
+                    })
                 })
         }
     }
