@@ -9,7 +9,10 @@ class CandyList extends Component {
                 <h3 key={`candyList`}>Kandy Korner has all these great candies:</h3>
                 {
                     this.props.TacoCandies.map(cObj =>
-                        <SingleCandy key={`SingleCandy--${cObj.id}`}TacoCandyTypes={this.props.TacoCandyTypes} candy={cObj} />
+                        <SingleCandy key={`SingleCandy--${cObj.id}`}
+                        TacoCandyTypes={this.props.TacoCandyTypes}
+                        candy={cObj}
+                        discontinueCandy = {this.props.discontinueCandy} />
                     )
                 }
             </section>
