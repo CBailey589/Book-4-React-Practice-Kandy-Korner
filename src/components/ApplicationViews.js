@@ -15,6 +15,15 @@ class ApplicationViews extends Component {
         TacoCandies: [],
     }
 
+    discontinueCandy = (id) => {
+        fetch(`http://localhost:5002/candyArray/${id}`, {
+            "method": "DELETE"
+        })
+        .then(() => fetch("http://localhost:5002/candyArray"))
+        .then(r => r.json())
+        .then(candies => this.setState({ TacoCandies: candies }))
+    }
+
     componentDidMount() {
         const newState = {}
 
@@ -38,17 +47,18 @@ class ApplicationViews extends Component {
         return (
             <React.Fragment>
                 <Route exact path="/" render={() => {
-                    return <StoreList TacoStores={this.state.TacoStores} />
+                    return <StoreList
+                    TacoStores={this.state.TacoStores} />
                 }} />
                 <Route exact path="/employees" render={() => {
-                    return <EmployeeList TacoEmployees={this.state.TacoEmployees} />
+                    return <EmployeeList
+                    TacoEmployees={this.state.TacoEmployees} />
                 }} />
                 <Route exact path="/candies" render={() => {
-                    return <CandyList TacoCandyTypes={this.state.TacoCandyTypes}
-                        TacoCandies={this.state.TacoCandies} />
-                }} />
-                <Route exact path="/search" render={() => {
-                    return <SearchResults />
+                    return <CandyList
+                    TacoCandyTypes={this.state.TacoCandyTypes}
+                    TacoCandies={this.state.TacoCandies}
+                    discontinueCandy={this.discontinueCandy} />
                 }} />
             </React.Fragment>
         )
