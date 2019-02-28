@@ -60,6 +60,9 @@ class ApplicationViews extends Component {
                     TacoCandies={this.state.TacoCandies}
                     discontinueCandy={this.discontinueCandy} />
                 }} />
+                <Route exact path="/search" render={() => {
+                    return <SearchResults />
+                }} />
             </React.Fragment>
         )
     }
