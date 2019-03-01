@@ -20,12 +20,9 @@ class ApplicationViews extends Component {
     }
 
     discontinueCandy = (id) => {
-        fetch(`http://localhost:5002/candyArray/${id}`, {
-            "method": "DELETE"
-        })
-            .then(() => fetch("http://localhost:5002/candyArray"))
-            .then(r => r.json())
-            .then(candies => this.setState({ TacoCandies: candies }))
+        CandyManager.DELETE(id)
+            .then(() => CandyManager.GETALL())
+            .then(json => this.setState({ TacoCandies: json }))
     }
 
     componentDidMount() {
