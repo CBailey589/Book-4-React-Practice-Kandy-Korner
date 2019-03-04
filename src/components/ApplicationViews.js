@@ -56,7 +56,8 @@ class ApplicationViews extends Component {
                 <Route exact path="/stores/:storeId(\d+)" render={(props) => {
                     return <StoreDetails
                         {...props}
-                        TacoStores={this.state.TacoStores} />
+                        TacoStores={this.state.TacoStores}
+                        TacoEmployees={this.state.TacoEmployees} />
                 }} />
                 <Route exact path="/employees" render={(props) => {
                     return <EmployeeList

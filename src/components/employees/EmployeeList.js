@@ -9,10 +9,14 @@ class EmployeeList extends Component {
                 <h3>Meet our employees!</h3>
                 {
                     this.props.TacoEmployees.map(eObj =>
-                        <SingleEmployee key={`SingleEmployee--${eObj.id}`}
-                        TacoEmployees={this.props.TacoEmployees}
-                        employee={eObj}
-                        fireEmployee = {this.props.fireEmployee} />
+                        <section key={`employeeSection--${eObj.id}`}>
+                            <SingleEmployee key={`SingleEmployee--${eObj.id}`}
+                                TacoEmployees={this.props.TacoEmployees}
+                                employee={eObj} />
+                            <button key={`fire--${eObj.id}`} onClick={() => {
+                                this.props.fireEmployee(eObj.id)
+                            }}>Fire</button>
+                        </section>
                     )
                 }
             </section>

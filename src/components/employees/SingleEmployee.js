@@ -7,10 +7,6 @@ class SingleEmployee extends Component {
         return (
             <div key={`employee-${employee.id}`} className="singleEmployee">
             <Link className="nav-link" to={`/employees/${employee.id}`}>{employee.name}</Link>
-                <button onClick={() => {
-                    this.props.fireEmployee(employee.id)
-                }}
-                >Fire</button>
             </div>
         )
     }
