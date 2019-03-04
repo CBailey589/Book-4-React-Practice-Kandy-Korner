@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
 
 class StoreList extends Component {
@@ -9,9 +10,9 @@ class StoreList extends Component {
                 {
                     this.props.TacoStores.map(sObj =>
                         <div key={`store--${sObj.id}`}>
-                            {sObj.name}
+                        <Link className="nav-link" to={`/stores/${sObj.id}`}>{sObj.name}</Link>
                             <div key={`address--${sObj.id}`}>
-                                {sObj.address}
+                               Address: {sObj.address}
                             </div>
                         </div>
                     )

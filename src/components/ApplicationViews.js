@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom'
 import React, { Component } from "react"
 import StoreList from "./locations/StoreList"
+import StoreDetails from "./locations/StoreDetails"
 import EmployeeList from "./employees/EmployeeList"
 import CandyList from "./candies/CandyList"
 import SearchResults from "./nav/SearchResults"
@@ -40,8 +41,14 @@ class ApplicationViews extends Component {
     render() {
         return (
             <React.Fragment>
-                <Route exact path="/" render={() => {
+                <Route exact path="/" render={(props) => {
                     return <StoreList
+                        {...props}
+                        TacoStores={this.state.TacoStores} />
+                }} />
+                <Route exact path="/stores/:storeId(\d+)" render={(props) => {
+                    return <StoreDetails
+                        {...props}
                         TacoStores={this.state.TacoStores} />
                 }} />
                 <Route exact path="/employees" render={() => {
