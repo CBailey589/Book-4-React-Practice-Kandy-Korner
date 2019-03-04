@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import StoreList from "./locations/StoreList"
 import StoreDetails from "./locations/StoreDetails"
 import EmployeeList from "./employees/EmployeeList"
+import EmployeeDetails from "./employees/EmployeeDetails"
 import CandyList from "./candies/CandyList"
 import SearchResults from "./nav/SearchResults"
 import CandyManager from '../modules/resourceManagers/CandyManager';
@@ -24,6 +25,12 @@ class ApplicationViews extends Component {
         CandyManager.DELETE(id)
             .then(() => CandyManager.GETALL())
             .then(json => this.setState({ TacoCandies: json }))
+    }
+
+    fireEmployee = (id) => {
+        EmployeeManager.DELETE(id)
+            .then(() => EmployeeManager.GETALL())
+            .then(json => this.setState({ TacoEmployees: json }))
     }
 
     componentDidMount() {
@@ -51,10 +58,20 @@ class ApplicationViews extends Component {
                         {...props}
                         TacoStores={this.state.TacoStores} />
                 }} />
-                <Route exact path="/employees" render={() => {
+                <Route exact path="/employees" render={(props) => {
                     return <EmployeeList
-                        TacoEmployees={this.state.TacoEmployees} />
+                        {...props}
+                        TacoEmployees={this.state.TacoEmployees}
+                        fireEmployee={this.fireEmployee} />
                 }} />
+                <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
+                    return <EmployeeDetails
+                        {...props}
+                        TacoEmployees={this.state.TacoEmployees}
+                        fireEmployee={this.fireEmployee}
+                        TacoStores={this.state.TacoStores} />
+                }} />
+
                 <Route exact path="/candies" render={() => {
                     return <CandyList
                         TacoCandyTypes={this.state.TacoCandyTypes}

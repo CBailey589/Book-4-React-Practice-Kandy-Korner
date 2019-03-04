@@ -50,7 +50,7 @@
     {
       "id": 8,
       "name": "Janet Woods",
-      "store": 2
+      "store": 1
     }
   ],
   "candyTypeArray": [
@@ -216,8 +216,9 @@
       "name": "Milky Way Bites"
     },
     {
-        "id": 28, "candyType": 6,
-        "name": "Twix Bites"
+      "id": 28,
+      "candyType": 6,
+      "name": "Twix Bites"
     }
   ]
 }

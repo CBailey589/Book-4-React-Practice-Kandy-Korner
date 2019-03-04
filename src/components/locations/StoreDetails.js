@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class StoreList extends Component {
+class StoreDetail extends Component {
     render() {
         const store = this.props.TacoStores.find(store => store.id === parseInt(this.props.match.params.storeId)) || {}
         return (
@@ -21,4 +21,4 @@ class StoreList extends Component {
     }
 }
 
-export default StoreList
+export default StoreDetail

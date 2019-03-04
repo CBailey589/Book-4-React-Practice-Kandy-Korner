@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SingleEmployee from "./SingleEmployee"
 
 
 class EmployeeList extends Component {
@@ -8,9 +9,10 @@ class EmployeeList extends Component {
                 <h3>Meet our employees!</h3>
                 {
                     this.props.TacoEmployees.map(eObj =>
-                        <div key={`employee--${eObj.id}`}>
-                            {eObj.name}
-                        </div>
+                        <SingleEmployee key={`SingleEmployee--${eObj.id}`}
+                        TacoEmployees={this.props.TacoEmployees}
+                        employee={eObj}
+                        fireEmployee = {this.props.fireEmployee} />
                     )
                 }
             </section>
