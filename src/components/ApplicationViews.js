@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from "react-router-dom"
 import React, { Component } from "react"
 import StoreList from "./locations/StoreList"
 import StoreDetails from "./locations/StoreDetails"
@@ -11,9 +11,12 @@ import CandyManager from '../modules/resourceManagers/CandyManager';
 import StoreManager from '../modules/resourceManagers/StoreManager';
 import EmployeeManager from '../modules/resourceManagers/EmployeeManager';
 import CandyTypeManager from '../modules/resourceManagers/CandyTypeManager';
+import Login from "./authentication/Login"
 
 
 class ApplicationViews extends Component {
+
+    isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 
     state = {
         TacoStores: [],
@@ -37,7 +40,7 @@ class ApplicationViews extends Component {
     hireEmployee = (obj) => {
         return EmployeeManager.POST(obj)
             .then(() => EmployeeManager.GETALL())
-            .then(json => this.setState({ TacoEmployees: json}))
+            .then(json => this.setState({ TacoEmployees: json }))
     }
 
     componentDidMount() {
@@ -55,6 +58,7 @@ class ApplicationViews extends Component {
     render() {
         return (
             <React.Fragment>
+                <Route path="/login" component={Login} />
                 <Route exact path="/" render={(props) => {
                     return <StoreList
                         {...props}
@@ -67,10 +71,14 @@ class ApplicationViews extends Component {
                         TacoEmployees={this.state.TacoEmployees} />
                 }} />
                 <Route exact path="/employees" render={(props) => {
-                    return <EmployeeList
-                        {...props}
-                        TacoEmployees={this.state.TacoEmployees}
-                        fireEmployee={this.fireEmployee} />
+                    if (this.isAuthenticated()) {
+                        return <EmployeeList
+                            {...props}
+                            TacoEmployees={this.state.TacoEmployees}
+                            fireEmployee={this.fireEmployee} />
+                    } else {
+                        return <Redirect to="/login" />
+                    }
                 }} />
                 <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
                     return <EmployeeDetails
