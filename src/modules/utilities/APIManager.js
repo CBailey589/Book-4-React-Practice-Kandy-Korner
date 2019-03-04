@@ -3,7 +3,7 @@ import Settings from "./Settings"
 
 export default Object.create(null, {
     GET: {
-        value: function (array, id) {
+        value: function (id) {
             return fetch(`${Settings.url}/${this.array}/${id}`)
                 .then(r => r.json())
         }
@@ -15,11 +15,22 @@ export default Object.create(null, {
         }
     },
     DELETE: {
-        value: function(id) {
+        value: function (id) {
             return fetch(`${Settings.url}/${this.array}/${id}`,
-            {
-                method:"DELETE"
-            })
+                {
+                    method: "DELETE"
+                })
+        }
+    },
+    POST: {
+        value: function (newObj) {
+            return fetch(`${Settings.url}/${this.array}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newObj)
+            }).then(data => data.json())
         }
     }
 })

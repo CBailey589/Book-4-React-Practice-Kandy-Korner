@@ -4,6 +4,7 @@ import StoreList from "./locations/StoreList"
 import StoreDetails from "./locations/StoreDetails"
 import EmployeeList from "./employees/EmployeeList"
 import EmployeeDetails from "./employees/EmployeeDetails"
+import EmployeeForm from "./employees/EmployeeForm"
 import CandyList from "./candies/CandyList"
 import SearchResults from "./nav/SearchResults"
 import CandyManager from '../modules/resourceManagers/CandyManager';
@@ -31,6 +32,12 @@ class ApplicationViews extends Component {
         EmployeeManager.DELETE(id)
             .then(() => EmployeeManager.GETALL())
             .then(json => this.setState({ TacoEmployees: json }))
+    }
+
+    hireEmployee = (obj) => {
+        return EmployeeManager.POST(obj)
+            .then(() => EmployeeManager.GETALL())
+            .then(json => this.setState({ TacoEmployees: json}))
     }
 
     componentDidMount() {
@@ -70,6 +77,12 @@ class ApplicationViews extends Component {
                         {...props}
                         TacoEmployees={this.state.TacoEmployees}
                         fireEmployee={this.fireEmployee}
+                        TacoStores={this.state.TacoStores} />
+                }} />
+                <Route path="/employees/new" render={(props) => {
+                    return <EmployeeForm
+                        {...props}
+                        hireEmployee={this.hireEmployee}
                         TacoStores={this.state.TacoStores} />
                 }} />
 
