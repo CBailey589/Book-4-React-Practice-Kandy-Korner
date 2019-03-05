@@ -24,9 +24,22 @@ class EmployeeList extends Component {
                                 <SingleEmployee key={`SingleEmployee--${eObj.id}`}
                                     TacoEmployees={this.props.TacoEmployees}
                                     employee={eObj} />
-                                <button key={`fire--${eObj.id}`} onClick={() => {
+                                <button
+                                key={`fire--${eObj.id}`}
+                                onClick={() => {
                                     this.props.fireEmployee(eObj.id)
-                                }}>Fire</button>
+                                }}>
+                                    Fire
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-success"
+                                    key={`edit--${eObj.id}`}
+                                    onClick={() => {
+                                        this.props.history.push(`/employees/${eObj.id}/edit`);
+                                    }}>
+                                    Edit
+                                </button>
                             </section>
                         )
                     }

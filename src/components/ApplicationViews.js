@@ -5,6 +5,7 @@ import StoreDetails from "./locations/StoreDetails"
 import EmployeeList from "./employees/EmployeeList"
 import EmployeeDetails from "./employees/EmployeeDetails"
 import EmployeeForm from "./employees/EmployeeForm"
+import EmployeeEditForm from "./employees/EmployeeEditForm"
 import CandyList from "./candies/CandyList"
 import SearchResults from "./nav/SearchResults"
 import CandyManager from '../modules/resourceManagers/CandyManager';
@@ -43,9 +44,15 @@ class ApplicationViews extends Component {
             .then(json => this.setState({ TacoEmployees: json }))
     }
 
+    updateEmployee = (editedObj) => {
+        return EmployeeManager.PUT(editedObj)
+            .then(() => EmployeeManager.GETALL())
+            .then(json => this.setState({ TacoEmployees: json }))
+    }
+
+
     componentDidMount() {
         const newState = {}
-
         let prom1 = Promise.resolve(StoreManager.GETALL().then(json => newState.TacoStores = json))
         let prom2 = Promise.resolve(EmployeeManager.GETALL().then(json => newState.TacoEmployees = json))
         let prom3 = Promise.resolve(CandyTypeManager.GETALL().then(json => newState.TacoCandyTypes = json))
@@ -87,13 +94,20 @@ class ApplicationViews extends Component {
                         fireEmployee={this.fireEmployee}
                         TacoStores={this.state.TacoStores} />
                 }} />
-                <Route path="/employees/new" render={(props) => {
+                <Route exact path="/employees/new" render={(props) => {
                     return <EmployeeForm
                         {...props}
                         hireEmployee={this.hireEmployee}
                         TacoStores={this.state.TacoStores} />
                 }} />
-
+                <Route
+                    path="/employees/:employeeId(\d+)/edit" render={props => {
+                        return <EmployeeEditForm
+                            {...props}
+                            TacoStores={this.state.TacoStores}
+                            updateEmployee={this.updateEmployee} />
+                    }}
+                />
                 <Route exact path="/candies" render={() => {
                     return <CandyList
                         TacoCandyTypes={this.state.TacoCandyTypes}

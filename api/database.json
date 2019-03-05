@@ -51,6 +51,11 @@
       "id": 8,
       "name": "Janet Woods",
       "store": 2
+    },
+    {
+      "name": "Steve Brownlee",
+      "store": 1,
+      "id": 9
     }
   ],
   "candyTypeArray": [

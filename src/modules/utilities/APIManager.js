@@ -23,14 +23,25 @@ export default Object.create(null, {
         }
     },
     POST: {
-        value: function (newObj) {
+        value: function (obj) {
             return fetch(`${Settings.url}/${this.array}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(newObj)
+                body: JSON.stringify(obj)
             }).then(data => data.json())
+        }
+    },
+    PUT: {
+        value: function (obj) {
+            return fetch(`${Settings.url}/${this.array}/${obj.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            }).then(data => data.json());
         }
     }
 })
